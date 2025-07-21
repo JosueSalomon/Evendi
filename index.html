@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evendi - Tu evento, simplificado</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- DaisyUI CDN (se integra con Tailwind) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        /* Custom colors based on #1B3A57 */
+        :root {
+            --color-primary: #1B3A57;
+            --color-accent: #3498db; /* Lighter blue for accents */
+            --color-background-light: #f3f4f6; /* Very light gray for section backgrounds */
+            --color-text-main: #4b5563; /* Medium gray for main text */
+            --color-text-light: #d1d5db; /* Light gray for text on dark backgrounds */
+            --color-card-bg: #ffffff; /* White for card backgrounds */
+        }
+
+        /* General styles */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: var(--color-background-light);
+        }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .section-container {
+            padding: 4rem 1rem; /* Increased padding for better spacing */
+            margin-bottom: 2rem; /* Space between sections */
+            border-radius: 1rem; /* Rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            background-color: var(--color-background-light); /* Section background */
+        }
+
+        .section-container.bg-white {
+             background-color: var(--color-card-bg); /* Section background for white background sections */
+        }
+
+        /* Styles for fixed navbar */
+        .navbar-fixed {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            background-color: var(--color-primary);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styles for section titles */
+        h2 {
+            color: var(--color-primary);
+            font-size: 2.5rem; /* Larger font size */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem; /* More space below the title */
+        }
+
+        /* Styles for cards */
+        .card {
+            background-color: var(--color-card-bg);
+            border-radius: 0.75rem; /* More rounded corners */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15), 0 6px 8px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a344f; /* Slightly darker on hover */
+            border-color: #1a344f;
+        }
+
+        .btn-accent {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+            transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+        }
+
+        .btn-accent:hover {
+            background-color: #2a81c7; /* Slightly darker on hover */
+            border-color: #2a81c7;
+        }
+
+        /* Bounce animation for arrows */
+        @keyframes bounce-y {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .animate-bounce-y {
+            animation: bounce-y 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Navbar for Desktop -->
+    <!-- This navbar is only visible on large screens (lg:flex) -->
+    <div class="navbar navbar-fixed hidden lg:flex justify-between items-center px-8 py-4 shadow-md" style="background-color: var(--color-primary);">
+        <div class="flex-1">
+            <a href="#inicio" class="text-3xl font-bold text-white">Evendi</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="#inicio" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Inicio</a></li>
+                <li><a href="#que-es-evendi" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Qué es Evendi</a></li>
+                <li><a href="#servicios" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Servicios</a></li>
+                <li><a href="#como-funciona" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Cómo funciona</a></li>
+                <li><a href="#testimonios" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Testimonios</a></li>
+                <li><a href="#contacto" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Contacto</a></li>
+                <li><a href="#preguntas-frecuentes" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Drawer for Mobile (Navbar and Sidebar) -->
+    <!-- The drawer itself is always present, but its 'open' state and visibility are controlled by CSS classes. -->
+    <div class="drawer">
+        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content flex flex-col items-center justify-center">
+            <!-- Navbar for mobile devices (only visible on small screens) -->
+            <!-- The button to open the drawer is only visible on small screens (lg:hidden) -->
+            <div class="w-full navbar bg-base-100 lg:hidden shadow-md" style="background-color: var(--color-primary);">
+                <div class="flex-none">
+                    <label for="my-drawer-2" class="btn btn-square btn-ghost text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </label>
+                </div>
+                <div class="flex-1 px-2 mx-2 text-white text-xl font-bold">Evendi</div>
+            </div>
+
+            <!-- Main content of the page -->
+            <!-- On large screens, the main content takes full width (lg:w-full) and has padding-top to account for the fixed navbar -->
+            <main class="w-full lg:pt-20"> <!-- Added lg:pt-20 to push content down from fixed navbar -->
+                <!-- Section: Inicio -->
+                <section id="inicio" class="section-container min-h-screen flex items-center justify-center animate-fade-in" style="background-color: var(--color-background-light);">
+                    <div class="hero-content text-center">
+                        <div class="max-w-md">
+                            <!-- Placeholder for the logo -->
+                            <div class="w-48 h-48 mx-auto mb-6 bg-gray-300 flex items-center justify-center rounded-full shadow-inner" style="background-color: var(--color-text-light);">
+                                <span class="text-2xl font-bold text-gray-700">LOGO</span>
+                            </div>
+                            <h1 class="text-5xl font-bold mb-4" style="color: var(--color-primary);">Evendi</h1>
+                            <p class="py-6 text-lg" style="color: var(--color-text-main);">"Tu evento, simplificado. Conecta, organiza, celebra."</p>
+                            <a href="#que-es-evendi" class="btn btn-primary btn-lg">Descubre más</a>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Qué es Evendi -->
+                <section id="que-es-evendi" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">¿Qué es Evendi?</h2>
+
+                    <!-- History -->
+                    <div class="card shadow-xl mb-8 rounded-box">
+                        <div class="card-body">
+                            <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Historia</h3>
+                            <p class="text-gray-700">Evendi nació de la necesidad de simplificar la organización de eventos. Nos dimos cuenta de que planificar una reunión, ya sea grande o pequeña, a menudo implicaba una serie de desafíos logísticos y de comunicación. Con la visión de crear una plataforma intuitiva y completa, nos propusimos construir una herramienta que eliminara el estrés de la planificación y permitiera a las personas centrarse en lo que realmente importa: disfrutar de sus eventos y crear recuerdos inolvidables.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mission -->
+                    <div class="card shadow-xl mb-8 rounded-box">
+                        <div class="card-body">
+                            <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Misión</h3>
+                            <p class="text-gray-700">Facilitar la conexión entre personas y eventos, proporcionando una plataforma integral que simplifique cada etapa de la organización, desde la invitación hasta la celebración, promoviendo experiencias memorables y sin complicaciones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Vision -->
+                    <div class="card shadow-xl mb-8 rounded-box">
+                        <div class="card-body">
+                            <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Visión</h3>
+                            <p class="text-gray-700">Ser la plataforma líder a nivel global para la gestión de eventos, reconocida por su innovación, facilidad de uso y por transformar la manera en que las personas organizan y participan en sus encuentros sociales y profesionales.</p>
+                        </div>
+                    </div>
+
+                    <!-- Purpose -->
+                    <div class="card shadow-xl rounded-box">
+                        <div class="card-body">
+                            <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestro Propósito</h3>
+                            <p class="text-gray-700">Empoderar a individuos y comunidades para crear, compartir y disfrutar de eventos de manera más eficiente y significativa, fomentando la alegría y la conexión humana a través de experiencias bien organizadas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Servicios -->
+                <section id="servicios" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Nuestros Servicios</h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Service 1: Invitation Management -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Invitaciones" alt="Gestión de Invitaciones" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Gestión de Invitaciones</h3>
+                                <p class="text-gray-700">Envía invitaciones personalizadas, gestiona confirmaciones de asistencia (RSVP) y mantén un seguimiento de tus invitados de manera sencilla.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service 2: Detailed Planning -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Planificación" alt="Planificación Detallada" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Planificación Detallada</h3>
+                                <p class="text-gray-700">Crea itinerarios, asigna tareas, gestiona presupuestos y coordina proveedores, todo en un solo lugar para una planificación sin estrés.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service 3: Real-time Communication -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Comunicación" alt="Comunicación en Tiempo Real" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Comunicación en Tiempo Real</h3>
+                                <p class="text-gray-700">Mantén a tus invitados informados con actualizaciones instantáneas, recordatorios y mensajes importantes antes y durante el evento.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service 4: Event Gallery -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Galería" alt="Galería de Eventos" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Galería de Eventos</h3>
+                                <p class="text-gray-700">Permite a los asistentes compartir fotos y videos, creando una galería colaborativa de los mejores momentos del evento.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service 5: Surveys and Feedback -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Encuestas" alt="Encuestas y Feedback" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Encuestas y Feedback</h3>
+                                <p class="text-gray-700">Recopila opiniones valiosas de tus invitados a través de encuestas personalizadas para mejorar futuros eventos.</p>
+                            </div>
+                        </div>
+
+                        <!-- Service 6: Calendar Integration -->
+                        <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
+                            <figure class="px-10 pt-10">
+                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Calendarios" alt="Integración con Calendarios" class="rounded-xl" />
+                            </figure>
+                            <div class="card-body items-center text-center">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Integración con Calendarios</h3>
+                                <p class="text-gray-700">Asegura que nadie se pierda tu evento con la opción de añadirlo directamente a sus calendarios personales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: How the app works -->
+                <section id="como-funciona" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">¿Cómo funciona la app?</h2>
+
+                    <div class="flex flex-col items-center">
+                        <!-- Step 1 -->
+                        <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
+                            <figure class="p-6">
+                                <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+1" alt="Crear Evento" class="rounded-box" />
+                            </figure>
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">1. Crea tu Evento</h3>
+                                <p class="text-gray-700">Regístrate en Evendi y comienza a crear tu evento. Define el tipo de evento, fecha, hora, lugar y añade una descripción atractiva. Personaliza cada detalle para que se ajuste a tus necesidades.</p>
+                            </div>
+                        </div>
+
+                        <!-- Visual arrow or separator -->
+                        <div class="text-center my-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
+                            <figure class="p-6">
+                                <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+2" alt="Invita" class="rounded-box" />
+                            </figure>
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">2. Invita a tus Asistentes</h3>
+                                <p class="text-gray-700">Envía invitaciones directamente desde la app a tus contactos. Gestiona las confirmaciones de asistencia (RSVP) en tiempo real y mantén un control claro de quién asistirá.</p>
+                            </div>
+                        </div>
+
+                        <!-- Visual arrow or separator -->
+                        <div class="text-center my-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
+                            <figure class="p-6">
+                                <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+3" alt="Organiza" class="rounded-box" />
+                            </figure>
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">3. Organiza y Colabora</h3>
+                                <p class="text-gray-700">Utiliza nuestras herramientas de planificación para crear agendas, asignar tareas, gestionar presupuestos y comunicarte con proveedores y colaboradores, todo en un entorno centralizado.</p>
+                            </div>
+                        </div>
+
+                        <!-- Visual arrow or separator -->
+                        <div class="text-center my-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="card lg:card-side shadow-xl w-full max-w-4xl rounded-box">
+                            <figure class="p-6">
+                                <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+4" alt="Disfruta" class="rounded-box" />
+                            </figure>
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">4. Disfruta de tu Evento</h3>
+                                <p class="text-gray-700">Con Evendi, la planificación es sencilla, lo que te permite relajarte y disfrutar plenamente de tu evento, creando momentos inolvidables con tus seres queridos o colegas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Testimonials -->
+                <section id="testimonios" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Lo que dicen nuestros usuarios</h2>
+
+                    <div class="carousel w-full rounded-box shadow-md">
+                        <!-- Testimonial 1 -->
+                        <div id="item1" class="carousel-item w-full flex flex-col items-center p-8">
+                            <div class="avatar online mb-4">
+                                <div class="w-24 rounded-full">
+                                    <img src="https://placehold.co/100x100/d1d5db/4b5563?text=Usuario+1" alt="Avatar Usuario 1" />
+                                </div>
+                            </div>
+                            <p class="text-lg italic text-gray-700 text-center mb-4">"Evendi hizo que la planificación de la fiesta de cumpleaños de mi hijo fuera increíblemente fácil. Pude gestionar las invitaciones y los RSVPs sin ningún problema. ¡Altamente recomendado!"</p>
+                            <p class="font-semibold text-xl" style="color: var(--color-primary);">- Ana G., Organizadora de Eventos</p>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div id="item2" class="carousel-item w-full flex flex-col items-center p-8">
+                            <div class="avatar online mb-4">
+                                <div class="w-24 rounded-full">
+                                    <img src="https://placehold.co/100x100/d1d5db/4b5563?text=Usuario+2" alt="Avatar Usuario 2" />
+                                </div>
+                            </div>
+                            <p class="text-lg italic text-gray-700 text-center mb-4">"Como profesional, valoro mucho las herramientas que me ahorran tiempo. Evendi ha simplificado la coordinación de mis eventos corporativos de una manera que nunca imaginé. ¡Fantástica aplicación!"</p>
+                            <p class="font-semibold text-xl" style="color: var(--color-primary);">- Carlos R., Gerente de Proyectos</p>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div id="item3" class="carousel-item w-full flex flex-col items-center p-8">
+                            <div class="avatar online mb-4">
+                                <div class="w-24 rounded-full">
+                                    <img src="https://placehold.co/100x100/d1d5db/4b5563?text=Usuario+3" alt="Avatar Usuario 3" />
+                                </div>
+                            </div>
+                            <p class="text-lg italic text-gray-700 text-center mb-4">"Lo que más me gusta de Evendi es la comunicación en tiempo real. Pude mantener a todos mis invitados informados sobre los cambios de última hora sin ningún esfuerzo. ¡Una maravilla!"</p>
+                            <p class="font-semibold text-xl" style="color: var(--color-primary);">- Sofía M., Anfitriona</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center w-full py-2 gap-2 mt-4">
+                        <a href="#item1" class="btn btn-xs btn-accent">1</a>
+                        <a href="#item2" class="btn btn-xs btn-accent">2</a>
+                        <a href="#item3" class="btn btn-xs btn-accent">3</a>
+                    </div>
+                </section>
+
+                <!-- Section: Contact -->
+                <section id="contacto" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Contáctanos</h2>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Contact Form -->
+                        <div class="card shadow-xl rounded-box">
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold mb-4" style="color: var(--color-primary);">Envíanos un Mensaje</h3>
+                                <form>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text" style="color: var(--color-text-main);">Tu Nombre</span>
+                                        </label>
+                                        <input type="text" placeholder="Nombre completo" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text" style="color: var(--color-text-main);">Tu Correo Electrónico</span>
+                                        </label>
+                                        <input type="email" placeholder="correo@ejemplo.com" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                    </div>
+                                    <div class="form-control mb-4">
+                                        <label class="label">
+                                            <span class="label-text" style="color: var(--color-text-main);">Asunto</span>
+                                        </label>
+                                        <input type="text" placeholder="Asunto del mensaje" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                    </div>
+                                    <div class="form-control mb-6">
+                                        <label class="label">
+                                            <span class="label-text" style="color: var(--color-text-main);">Tu Mensaje</span>
+                                        </label>
+                                        <textarea class="textarea textarea-bordered h-24 w-full rounded-md" placeholder="Escribe tu mensaje aquí..." style="border-color: var(--color-text-light);"></textarea>
+                                    </div>
+                                    <div class="form-control">
+                                        <button class="btn btn-primary">Enviar Mensaje</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="card shadow-xl rounded-box">
+                            <div class="card-body">
+                                <h3 class="card-title text-2xl font-semibold mb-4" style="color: var(--color-primary);">Nuestra Información</h3>
+                                <p class="text-gray-700 mb-2">
+                                    <strong style="color: var(--color-primary);">Correo Electrónico:</strong> info@evendi.com
+                                </p>
+                                <p class="text-gray-700 mb-2">
+                                    <strong style="color: var(--color-primary);">Teléfono:</strong> +1 (555) 123-4567
+                                </p>
+                                <p class="text-gray-700 mb-2">
+                                    <strong style="color: var(--color-primary);">Dirección:</strong> Calle Ficticia 123, Ciudad Evendi, CP 98765
+                                </p>
+                                <div class="divider"></div>
+                                <p class="text-gray-700">Síguenos en nuestras redes sociales:</p>
+                                <div class="flex space-x-4 mt-4">
+                                    <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.588-1.333h2.412v-3h-3.473c-4.045 0-5.527 1.165-5.527 4.667v2.333z"/></svg>
+                                    </a>
+                                    <a href="#" class="text-blue-400 hover:text-blue-600 transition-colors duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.607 3.419-2.079 1.443-4.696 2.313-7.548 2.313-4.914 0-9.042-2.868-10.458-6.914 3.141.222 6.287-1.012 8.708-3.392z"/></svg>
+                                    </a>
+                                    <a href="#" class="text-pink-500 hover:text-pink-700 transition-colors duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.07 1.645.07 4.85 0 3.204-.012 3.584-.07 4.85-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.252-.149-4.771-1.691-4.919-4.919-.058-1.265-.07-1.644-.07-4.85 0-3.204.012-3.584.07-4.85.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.073 4.948.073 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Frequently Asked Questions -->
+                <section id="preguntas-frecuentes" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
+
+                    <div class="flex flex-col gap-4">
+                        <!-- Question 1 -->
+                        <div class="collapse collapse-arrow shadow-md rounded-box">
+                            <input type="radio" name="my-accordion-2" checked="checked" />
+                            <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
+                                ¿Cómo puedo crear un evento en Evendi?
+                            </div>
+                            <div class="collapse-content text-gray-700">
+                                <p>Para crear un evento, simplemente regístrate en la aplicación, ve a la sección "Mis Eventos" y haz clic en "Crear Nuevo Evento". Se te guiará a través de un proceso sencillo para añadir todos los detalles necesarios.</p>
+                            </div>
+                        </div>
+
+                        <!-- Question 2 -->
+                        <div class="collapse collapse-arrow shadow-md rounded-box">
+                            <input type="radio" name="my-accordion-2" />
+                            <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
+                                ¿Evendi es gratuito?
+                            </div>
+                            <div class="collapse-content text-gray-700">
+                                <p>Ofrecemos una versión gratuita con funcionalidades básicas para eventos pequeños. También contamos con planes premium que desbloquean características avanzadas para eventos más grandes y complejos.</p>
+                            </div>
+                        </div>
+
+                        <!-- Question 3 -->
+                        <div class="collapse collapse-arrow shadow-md rounded-box">
+                            <input type="radio" name="my-accordion-2" />
+                            <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
+                                ¿Puedo invitar a personas que no tienen la app?
+                            </div>
+                            <div class="collapse-content text-gray-700">
+                                <p>Sí, puedes enviar invitaciones por correo electrónico o a través de enlaces compartibles, lo que permite que tus invitados confirmen su asistencia incluso si no tienen la aplicación instalada.</p>
+                            </div>
+                        </div>
+
+                        <!-- Question 4 -->
+                        <div class="collapse collapse-arrow shadow-md rounded-box">
+                            <input type="radio" name="my-accordion-2" />
+                            <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
+                                ¿Cómo gestiono los RSVPs?
+                            </div>
+                            <div class="collapse-content text-gray-700">
+                                <p>La aplicación de Evendi te proporciona un panel de control donde puedes ver en tiempo real el estado de las confirmaciones de asistencia de tus invitados, facilitando la gestión de tu lista.</p>
+                            </div>
+                        </div>
+
+                        <!-- Question 5 -->
+                        <div class="collapse collapse-arrow shadow-md rounded-box">
+                            <input type="radio" name="my-accordion-2" />
+                            <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
+                                ¿Es posible colaborar con otros en la organización de un evento?
+                            </div>
+                            <div class="collapse-content text-gray-700">
+                                <p>Absolutamente. Evendi permite añadir colaboradores a tus eventos, quienes pueden ayudarte con la planificación, asignación de tareas y comunicación con los asistentes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer footer-center p-4 bg-base-300 text-base-content mt-8 w-full rounded-t-box" style="background-color: var(--color-primary); color: var(--color-text-light);">
+                <aside>
+                    <p>Copyright © <span id="currentYear"></span> - Todos los derechos reservados por Evendi</p>
+                </aside>
+            </footer>
+        </div>
+
+        <!-- Sidebar for Mobile -->
+        <!-- This sidebar is hidden on large screens (lg:hidden) -->
+        <div class="drawer-side lg:hidden">
+            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+            <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content shadow-lg" style="background-color: var(--color-primary); color: var(--color-text-light);">
+                <li class="mb-4">
+                    <a class="text-2xl font-bold text-white mb-4">Evendi</a>
+                </li>
+                <li><a href="#inicio" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Inicio</a></li>
+                <li><a href="#que-es-evendi" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Qué es Evendi</a></li>
+                <li><a href="#servicios" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Servicios</a></li>
+                <li><a href="#como-funciona" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Cómo funciona la app</a></li>
+                <li><a href="#testimonios" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Testimonios</a></li>
+                <li><a href="#contacto" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Contacto</a></li>
+                <li><a href="#preguntas-frecuentes" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Preguntas Frecuentes</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Updates the current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Closes the drawer when a link is clicked (mobile only)
+        document.querySelectorAll('.drawer-side ul li a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('my-drawer-2').checked = false;
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const sections = document.querySelectorAll('.animate-fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.animationDelay = '0.2s'; /* Delay for animation visibility */
+                    entry.target.style.animationFillMode = 'forwards';
+                } else {
+                    // Optional: reset animation if it goes out of view
+                    // entry.target.style.opacity = 0;
+                    // entry.target.style.transform = 'translateY(20px)';
+                }
+            });
+        }, {
+            threshold: 0.1 /* When 10% of the section is visible */
+        });
+
+        sections.forEach(section => {
+            section.style.opacity = 0; /* Initially hidden */
+            section.style.transform = 'translateY(20px)'; /* Initial position for animation */
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
