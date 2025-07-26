@@ -10,23 +10,23 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
 
     <style>
-        /* Custom colors based on #1B3A57 */
+        /* Colores personalizados basados en #1B3A57 */
         :root {
             --color-primary: #1B3A57;
-            --color-accent: #3498db; /* Lighter blue for accents */
-            --color-background-light: #f3f4f6; /* Very light gray for section backgrounds */
-            --color-text-main: #4b5563; /* Medium gray for main text */
-            --color-text-light: #d1d5db; /* Light gray for text on dark backgrounds */
-            --color-card-bg: #ffffff; /* White for card backgrounds */
+            --color-accent: #3498db; /* Azul más claro para acentos */
+            --color-background-light: #f3f4f6; /* Gris muy claro para fondos de sección */
+            --color-text-main: #4b5563; /* Gris medio para texto principal */
+            --color-text-light: #d1d5db; /* Gris claro para texto sobre fondos oscuros */
+            --color-card-bg: #ffffff; /* Blanco para fondos de tarjetas */
         }
 
-        /* General styles */
+        /* Estilos generales */
         body {
             font-family: "Inter", sans-serif;
             background-color: var(--color-background-light);
         }
 
-        /* Custom animations */
+        /* Animaciones personalizadas */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -37,18 +37,18 @@
         }
 
         .section-container {
-            padding: 4rem 1rem; /* Increased padding for better spacing */
-            margin-bottom: 2rem; /* Space between sections */
-            border-radius: 1rem; /* Rounded corners */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Soft shadow */
-            background-color: var(--color-background-light); /* Section background */
+            padding: 4rem 1rem; /* Aumenta el padding para un mejor espaciado */
+            margin-bottom: 2rem; /* Espacio entre secciones */
+            border-radius: 1rem; /* Bordes redondeados */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra suave */
+            background-color: var(--color-background-light); /* Fondo de sección */
         }
 
         .section-container.bg-white {
-             background-color: var(--color-card-bg); /* Section background for white background sections */
+             background-color: var(--color-card-bg); /* Fondo de sección para secciones con fondo blanco */
         }
 
-        /* Styles for fixed navbar */
+        /* Estilos para el navbar fijo */
         .navbar-fixed {
             position: sticky;
             top: 0;
@@ -58,28 +58,28 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Styles for section titles */
+        /* Estilos para los títulos de sección */
         h2 {
             color: var(--color-primary);
-            font-size: 2.5rem; /* Larger font size */
+            font-size: 2.5rem; /* Tamaño de fuente más grande */
             font-weight: bold;
             text-align: center;
-            margin-bottom: 3rem; /* More space below the title */
+            margin-bottom: 3rem; /* Más espacio debajo del título */
         }
 
-        /* Styles for cards */
+        /* Estilos para tarjetas */
         .card {
             background-color: var(--color-card-bg);
-            border-radius: 0.75rem; /* More rounded corners */
+            border-radius: 0.75rem; /* Bordes más redondeados */
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         }
 
         .card:hover {
-            transform: translateY(-5px); /* Lift effect on hover */
+            transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
             box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15), 0 6px 8px -3px rgba(0, 0, 0, 0.08);
         }
 
-        /* Buttons */
+        /* Botones */
         .btn-primary {
             background-color: var(--color-primary);
             border-color: var(--color-primary);
@@ -88,7 +88,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #1a344f; /* Slightly darker on hover */
+            background-color: #1a344f; /* Un poco más oscuro al pasar el ratón */
             border-color: #1a344f;
         }
 
@@ -100,11 +100,11 @@
         }
 
         .btn-accent:hover {
-            background-color: #2a81c7; /* Slightly darker on hover */
+            background-color: #2a81c7; /* Un poco más oscuro al pasar el ratón */
             border-color: #2a81c7;
         }
 
-        /* Bounce animation for arrows */
+        /* Animación de rebote para flechas */
         @keyframes bounce-y {
             0%, 100% {
                 transform: translateY(0);
@@ -116,12 +116,22 @@
         .animate-bounce-y {
             animation: bounce-y 1.5s infinite;
         }
+
+        /* Ajustes específicos para el sidebar móvil */
+        .drawer-side .menu li a {
+            font-size: 0.95rem; /* Ligeramente más pequeño */
+            padding-top: 0.6rem; /* Ajustar padding vertical */
+            padding-bottom: 0.6rem; /* Ajustar padding vertical */
+        }
+        .drawer-side .menu li:first-child a {
+            margin-bottom: 1rem; /* Espacio extra para el título principal */
+        }
     </style>
 </head>
 <body>
 
-    <!-- Fixed Navbar for Desktop -->
-    <!-- This navbar is only visible on large screens (lg:flex) -->
+    <!-- Navbar Fijo para Escritorio -->
+    <!-- Este navbar es visible solo en pantallas grandes (lg:flex) -->
     <div class="navbar navbar-fixed hidden lg:flex justify-between items-center px-8 py-4 shadow-md" style="background-color: var(--color-primary);">
         <div class="flex-1">
             <a href="#inicio" class="text-3xl font-bold text-white">Evendi</a>
@@ -130,7 +140,9 @@
             <ul class="menu menu-horizontal px-1">
                 <li><a href="#inicio" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Inicio</a></li>
                 <li><a href="#que-es-evendi" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Qué es Evendi</a></li>
+                <li><a href="#equipo" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Nuestro Equipo</a></li>
                 <li><a href="#servicios" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Servicios</a></li>
+                <li><a href="#galeria-eventos" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Galería de Eventos</a></li>
                 <li><a href="#como-funciona" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Cómo funciona</a></li>
                 <li><a href="#testimonios" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Testimonios</a></li>
                 <li><a href="#contacto" class="text-white hover:bg-blue-700 rounded-lg py-2 px-4 transition-colors duration-200">Contacto</a></li>
@@ -139,13 +151,13 @@
         </div>
     </div>
 
-    <!-- Drawer for Mobile (Navbar and Sidebar) -->
-    <!-- The drawer itself is always present, but its 'open' state and visibility are controlled by CSS classes. -->
+    <!-- Drawer para Móviles (Navbar y Sidebar) -->
+    <!-- El drawer en sí siempre está presente, pero su estado 'abierto' y visibilidad se controlan con clases CSS. -->
     <div class="drawer">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content flex flex-col items-center justify-center">
-            <!-- Navbar for mobile devices (only visible on small screens) -->
-            <!-- The button to open the drawer is only visible on small screens (lg:hidden) -->
+            <!-- Navbar para dispositivos móviles (visible solo en pantallas pequeñas) -->
+            <!-- El botón para abrir el drawer es visible solo en pantallas pequeñas (lg:hidden) -->
             <div class="w-full navbar bg-base-100 lg:hidden shadow-md" style="background-color: var(--color-primary);">
                 <div class="flex-none">
                     <label for="my-drawer-2" class="btn btn-square btn-ghost text-white">
@@ -155,14 +167,14 @@
                 <div class="flex-1 px-2 mx-2 text-white text-xl font-bold">Evendi</div>
             </div>
 
-            <!-- Main content of the page -->
-            <!-- On large screens, the main content takes full width (lg:w-full) and has padding-top to account for the fixed navbar -->
-            <main class="w-full lg:pt-20"> <!-- Added lg:pt-20 to push content down from fixed navbar -->
-                <!-- Section: Inicio -->
+            <!-- Contenido principal de la página -->
+            <!-- En pantallas grandes, el contenido principal ocupa todo el ancho (lg:w-full) y tiene padding-top para el navbar fijo -->
+            <main class="w-full lg:pt-20"> <!-- Añadido lg:pt-20 para empujar el contenido hacia abajo del navbar fijo -->
+                <!-- Sección: Inicio -->
                 <section id="inicio" class="section-container min-h-screen flex items-center justify-center animate-fade-in" style="background-color: var(--color-background-light);">
                     <div class="hero-content text-center">
                         <div class="max-w-md">
-                            <!-- Placeholder for the logo -->
+                            <!-- Placeholder para el logo -->
                             <div class="w-48 h-48 mx-auto mb-6 bg-gray-300 flex items-center justify-center rounded-full shadow-inner" style="background-color: var(--color-text-light);">
                                 <span class="text-2xl font-bold text-gray-700">LOGO</span>
                             </div>
@@ -173,11 +185,11 @@
                     </div>
                 </section>
 
-                <!-- Section: Qué es Evendi -->
+                <!-- Sección: Qué es Evendi -->
                 <section id="que-es-evendi" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">¿Qué es Evendi?</h2>
 
-                    <!-- History -->
+                    <!-- Historia -->
                     <div class="card shadow-xl mb-8 rounded-box">
                         <div class="card-body">
                             <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Historia</h3>
@@ -185,7 +197,7 @@
                         </div>
                     </div>
 
-                    <!-- Mission -->
+                    <!-- Misión -->
                     <div class="card shadow-xl mb-8 rounded-box">
                         <div class="card-body">
                             <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Misión</h3>
@@ -193,7 +205,7 @@
                         </div>
                     </div>
 
-                    <!-- Vision -->
+                    <!-- Visión -->
                     <div class="card shadow-xl mb-8 rounded-box">
                         <div class="card-body">
                             <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestra Visión</h3>
@@ -201,7 +213,7 @@
                         </div>
                     </div>
 
-                    <!-- Purpose -->
+                    <!-- Propósito -->
                     <div class="card shadow-xl rounded-box">
                         <div class="card-body">
                             <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Nuestro Propósito</h3>
@@ -210,15 +222,66 @@
                     </div>
                 </section>
 
-                <!-- Section: Servicios -->
+                <!-- Sección: Nuestro Equipo -->
+                <section id="equipo" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Nuestro Equipo</h2>
+
+                    <div class="text-center mb-12 max-w-2xl mx-auto">
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            Somos ProfitMinds, un equipo de estudiantes de Ingeniería Industrial en UNAH-CU, apasionados por la innovación y el desarrollo de soluciones inteligentes.
+                            Creemos en el poder de la tecnología para transformar experiencias y simplificar procesos.
+                            Con EVENDI, apostamos por llevar la organización de eventos al siguiente nivel: más ágil, más pro y, sobre todo, inolvidable.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Miembro 1: CEO -->
+                        <div class="card shadow-xl rounded-box items-center text-center p-6 transform transition-transform duration-300 hover:scale-105">
+                            <figure class="mb-4">
+                                <img src="img/Fredy.jpg" alt="Fredy David Moreno Cárcamo" class="rounded-full w-32 h-32 object-cover border-4 border-blue-200" />
+                            </figure>
+                            <h3 class="card-title text-xl font-semibold mb-1" style="color: var(--color-primary);">Fredy David Moreno Cárcamo</h3>
+                            <p class="text-gray-600">CEO: Director Ejecutivo</p>
+                        </div>
+
+                        <!-- Miembro 2: COO -->
+                        <div class="card shadow-xl rounded-box items-center text-center p-6 transform transition-transform duration-300 hover:scale-105">
+                            <figure class="mb-4">
+                                <img src="img/Cristian .jpg" alt="Cristian Daniel Espino Ramírez" class="rounded-full w-32 h-32 object-cover border-4 border-blue-200" />
+                            </figure>
+                            <h3 class="card-title text-xl font-semibold mb-1" style="color: var(--color-primary);">Cristian Daniel Espino Ramírez</h3>
+                            <p class="text-gray-600">COO: Director de Operaciones</p>
+                        </div>
+
+                        <!-- Miembro 3: CFO -->
+                        <div class="card shadow-xl rounded-box items-center text-center p-6 transform transition-transform duration-300 hover:scale-105">
+                            <figure class="mb-4">
+                                <img src="img/Monica.jpg" alt="Monika Renee Rivas Lagos" class="rounded-full w-32 h-32 object-cover border-4 border-blue-200" />
+                            </figure>
+                            <h3 class="card-title text-xl font-semibold mb-1" style="color: var(--color-primary);">Monika Renee Rivas Lagos</h3>
+                            <p class="text-gray-600">CFO: Directora Financiera</p>
+                        </div>
+
+                        <!-- Miembro 4: CTO -->
+                        <div class="card shadow-xl rounded-box items-center text-center p-6 transform transition-transform duration-300 hover:scale-105">
+                            <figure class="mb-4">
+                                <img src="img/Sharon.jpg" alt="Sharon Lohanny Ochoa Espino" class="rounded-full w-32 h-32 object-cover border-4 border-blue-200" />
+                            </figure>
+                            <h3 class="card-title text-xl font-semibold mb-1" style="color: var(--color-primary);">Sharon Lohanny Ochoa Espino</h3>
+                            <p class="text-gray-600">CTO: Directora de Tecnología</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sección: Servicios -->
                 <section id="servicios" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">Nuestros Servicios</h2>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <!-- Service 1: Invitation Management -->
+                        <!-- Servicio 1: Gestión de Invitaciones -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Invitaciones" alt="Gestión de Invitaciones" class="rounded-xl" />
+                                <img src="Icons/invitacion.png" alt="Gestión de Invitaciones" class="rounded-xl" style="width: 150px;" />
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Gestión de Invitaciones</h3>
@@ -226,10 +289,10 @@
                             </div>
                         </div>
 
-                        <!-- Service 2: Detailed Planning -->
+                        <!-- Servicio 2: Planificación Detallada -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Planificación" alt="Planificación Detallada" class="rounded-xl" />
+                                <img src="Icons/planificacion.png" alt="Planificación Detallada" class="rounded-xl" style="width: 150px;" />
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Planificación Detallada</h3>
@@ -237,10 +300,10 @@
                             </div>
                         </div>
 
-                        <!-- Service 3: Real-time Communication -->
+                        <!-- Servicio 3: Comunicación en Tiempo Real -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Comunicación" alt="Comunicación en Tiempo Real" class="rounded-xl" />
+                                <img src="Icons/comunicacion.png" alt="Comunicación en Tiempo Real" class="rounded-xl" style="width: 150px;"/>
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Comunicación en Tiempo Real</h3>
@@ -248,10 +311,10 @@
                             </div>
                         </div>
 
-                        <!-- Service 4: Event Gallery -->
+                        <!-- Servicio 4: Galería de Eventos -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Galería" alt="Galería de Eventos" class="rounded-xl" />
+                                <img src="Icons/galeria" alt="Galería de Eventos" class="rounded-xl" style="width: 150px;"/>
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Galería de Eventos</h3>
@@ -259,10 +322,10 @@
                             </div>
                         </div>
 
-                        <!-- Service 5: Surveys and Feedback -->
+                        <!-- Servicio 5: Encuestas y Feedback -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Encuestas" alt="Encuestas y Feedback" class="rounded-xl" />
+                                <img src="Icons/encuesta.png" alt="Encuestas y Feedback" class="rounded-xl" style="width: 150px;" />
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Encuestas y Feedback</h3>
@@ -270,10 +333,10 @@
                             </div>
                         </div>
 
-                        <!-- Service 6: Calendar Integration -->
+                        <!-- Servicio 6: Integración con Calendarios -->
                         <div class="card shadow-xl rounded-box transform transition-transform duration-300 hover:scale-105">
                             <figure class="px-10 pt-10">
-                                <img src="https://placehold.co/150x150/d1d5db/4b5563?text=Calendarios" alt="Integración con Calendarios" class="rounded-xl" />
+                                <img src="/Icons/calendario.png" alt="Integración con Calendarios" class="rounded-xl" style="width: 150px;" />
                             </figure>
                             <div class="card-body items-center text-center">
                                 <h3 class="card-title text-2xl font-semibold" style="color: var(--color-primary);">Integración con Calendarios</h3>
@@ -283,12 +346,50 @@
                     </div>
                 </section>
 
-                <!-- Section: How the app works -->
+                <!-- Sección: Galería de Eventos -->
+                <section id="galeria-eventos" class="section-container container mx-auto p-8 animate-fade-in bg-white">
+                    <h2 class="text-4xl font-bold text-center mb-12">Galería de Eventos</h2>
+
+                    <div class="carousel w-full rounded-box shadow-md">
+                        <div id="event-slide1" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 1.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide2" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 2.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide3" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 3.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide4" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 4.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide5" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 5.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide6" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 6.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                        <div id="event-slide7" class="carousel-item w-full flex justify-center">
+                            <img src="img/Evento 7.jpg" class="rounded-box w-full object-cover" alt="" />
+                        </div>
+                    </div>
+                    <div class="flex justify-center w-full py-2 gap-2 mt-4">
+                        <a href="#event-slide1" class="btn btn-xs btn-accent">1</a>
+                        <a href="#event-slide2" class="btn btn-xs btn-accent">2</a>
+                        <a href="#event-slide3" class="btn btn-xs btn-accent">3</a>
+                        <a href="#event-slide4" class="btn btn-xs btn-accent">4</a>
+                        <a href="#event-slide5" class="btn btn-xs btn-accent">5</a>
+                        <a href="#event-slide6" class="btn btn-xs btn-accent">6</a>
+                        <a href="#event-slide7" class="btn btn-xs btn-accent">7</a>
+                    </div>
+                </section>
+
+                <!-- Sección: Cómo funciona la app -->
                 <section id="como-funciona" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">¿Cómo funciona la app?</h2>
 
                     <div class="flex flex-col items-center">
-                        <!-- Step 1 -->
+                        <!-- Paso 1 -->
                         <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
                             <figure class="p-6">
                                 <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+1" alt="Crear Evento" class="rounded-box" />
@@ -299,14 +400,14 @@
                             </div>
                         </div>
 
-                        <!-- Visual arrow or separator -->
+                        <!-- Flecha o separador visual -->
                         <div class="text-center my-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>
 
-                        <!-- Step 2 -->
+                        <!-- Paso 2 -->
                         <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
                             <figure class="p-6">
                                 <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+2" alt="Invita" class="rounded-box" />
@@ -317,14 +418,14 @@
                             </div>
                         </div>
 
-                        <!-- Visual arrow or separator -->
+                        <!-- Flecha o separador visual -->
                         <div class="text-center my-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>
 
-                        <!-- Step 3 -->
+                        <!-- Paso 3 -->
                         <div class="card lg:card-side shadow-xl mb-8 w-full max-w-4xl rounded-box">
                             <figure class="p-6">
                                 <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+3" alt="Organiza" class="rounded-box" />
@@ -335,14 +436,14 @@
                             </div>
                         </div>
 
-                        <!-- Visual arrow or separator -->
+                        <!-- Flecha o separador visual -->
                         <div class="text-center my-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400 animate-bounce-y" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="color: var(--color-text-light);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                             </svg>
                         </div>
 
-                        <!-- Step 4 -->
+                        <!-- Paso 4 -->
                         <div class="card lg:card-side shadow-xl w-full max-w-4xl rounded-box">
                             <figure class="p-6">
                                 <img src="https://placehold.co/200x200/d1d5db/4b5563?text=Paso+4" alt="Disfruta" class="rounded-box" />
@@ -355,12 +456,12 @@
                     </div>
                 </section>
 
-                <!-- Section: Testimonials -->
+                <!-- Sección: Testimonios -->
                 <section id="testimonios" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">Lo que dicen nuestros usuarios</h2>
 
                     <div class="carousel w-full rounded-box shadow-md">
-                        <!-- Testimonial 1 -->
+                        <!-- Testimonio 1 -->
                         <div id="item1" class="carousel-item w-full flex flex-col items-center p-8">
                             <div class="avatar online mb-4">
                                 <div class="w-24 rounded-full">
@@ -371,7 +472,7 @@
                             <p class="font-semibold text-xl" style="color: var(--color-primary);">- Ana G., Organizadora de Eventos</p>
                         </div>
 
-                        <!-- Testimonial 2 -->
+                        <!-- Testimonio 2 -->
                         <div id="item2" class="carousel-item w-full flex flex-col items-center p-8">
                             <div class="avatar online mb-4">
                                 <div class="w-24 rounded-full">
@@ -382,7 +483,7 @@
                             <p class="font-semibold text-xl" style="color: var(--color-primary);">- Carlos R., Gerente de Proyectos</p>
                         </div>
 
-                        <!-- Testimonial 3 -->
+                        <!-- Testimonio 3 -->
                         <div id="item3" class="carousel-item w-full flex flex-col items-center p-8">
                             <div class="avatar online mb-4">
                                 <div class="w-24 rounded-full">
@@ -401,12 +502,12 @@
                     </div>
                 </section>
 
-                <!-- Section: Contact -->
+                <!-- Sección: Contacto -->
                 <section id="contacto" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">Contáctanos</h2>
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- Contact Form -->
+                        <!-- Formulario de Contacto -->
                         <div class="card shadow-xl rounded-box">
                             <div class="card-body">
                                 <h3 class="card-title text-2xl font-semibold mb-4" style="color: var(--color-primary);">Envíanos un Mensaje</h3>
@@ -442,7 +543,7 @@
                             </div>
                         </div>
 
-                        <!-- Contact Information -->
+                        <!-- Información de Contacto -->
                         <div class="card shadow-xl rounded-box">
                             <div class="card-body">
                                 <h3 class="card-title text-2xl font-semibold mb-4" style="color: var(--color-primary);">Nuestra Información</h3>
@@ -473,12 +574,12 @@
                     </div>
                 </section>
 
-                <!-- Section: Frequently Asked Questions -->
+                <!-- Sección: Preguntas Frecuentes -->
                 <section id="preguntas-frecuentes" class="section-container container mx-auto p-8 animate-fade-in bg-white">
                     <h2 class="text-4xl font-bold text-center mb-12">Preguntas Frecuentes</h2>
 
                     <div class="flex flex-col gap-4">
-                        <!-- Question 1 -->
+                        <!-- Pregunta 1 -->
                         <div class="collapse collapse-arrow shadow-md rounded-box">
                             <input type="radio" name="my-accordion-2" checked="checked" />
                             <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
@@ -489,7 +590,7 @@
                             </div>
                         </div>
 
-                        <!-- Question 2 -->
+                        <!-- Pregunta 2 -->
                         <div class="collapse collapse-arrow shadow-md rounded-box">
                             <input type="radio" name="my-accordion-2" />
                             <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
@@ -500,7 +601,7 @@
                             </div>
                         </div>
 
-                        <!-- Question 3 -->
+                        <!-- Pregunta 3 -->
                         <div class="collapse collapse-arrow shadow-md rounded-box">
                             <input type="radio" name="my-accordion-2" />
                             <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
@@ -511,7 +612,7 @@
                             </div>
                         </div>
 
-                        <!-- Question 4 -->
+                        <!-- Pregunta 4 -->
                         <div class="collapse collapse-arrow shadow-md rounded-box">
                             <input type="radio" name="my-accordion-2" />
                             <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
@@ -522,7 +623,7 @@
                             </div>
                         </div>
 
-                        <!-- Question 5 -->
+                        <!-- Pregunta 5 -->
                         <div class="collapse collapse-arrow shadow-md rounded-box">
                             <input type="radio" name="my-accordion-2" />
                             <div class="collapse-title text-xl font-medium" style="color: var(--color-primary);">
@@ -544,8 +645,8 @@
             </footer>
         </div>
 
-        <!-- Sidebar for Mobile -->
-        <!-- This sidebar is hidden on large screens (lg:hidden) -->
+        <!-- Sidebar para Móviles -->
+        <!-- Este sidebar está oculto en pantallas grandes (lg:hidden) -->
         <div class="drawer-side lg:hidden">
             <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content shadow-lg" style="background-color: var(--color-primary); color: var(--color-text-light);">
@@ -554,7 +655,9 @@
                 </li>
                 <li><a href="#inicio" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Inicio</a></li>
                 <li><a href="#que-es-evendi" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Qué es Evendi</a></li>
+                <li><a href="#equipo" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Nuestro Equipo</a></li>
                 <li><a href="#servicios" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Servicios</a></li>
+                <li><a href="#galeria-eventos" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Galería de Eventos</a></li>
                 <li><a href="#como-funciona" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Cómo funciona la app</a></li>
                 <li><a href="#testimonios" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Testimonios</a></li>
                 <li><a href="#contacto" class="text-white hover:bg-blue-700 rounded-lg py-3 px-4 mb-2 transition-colors duration-200">Contacto</a></li>
@@ -564,17 +667,17 @@
     </div>
 
     <script>
-        // Updates the current year in the footer
+        // Actualiza el año actual en el footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // Closes the drawer when a link is clicked (mobile only)
+        // Cierra el drawer al hacer clic en un enlace (solo para móviles)
         document.querySelectorAll('.drawer-side ul li a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('my-drawer-2').checked = false;
             });
         });
 
-        // Intersection Observer for fade-in animations
+        // Observador de intersección para animaciones de entrada (fade-in)
         const sections = document.querySelectorAll('.animate-fade-in');
 
         const observer = new IntersectionObserver((entries) => {
@@ -582,21 +685,21 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = 1;
                     entry.target.style.transform = 'translateY(0)';
-                    entry.target.style.animationDelay = '0.2s'; /* Delay for animation visibility */
+                    entry.target.style.animationDelay = '0.2s'; /* Retraso para que se vea la animación */
                     entry.target.style.animationFillMode = 'forwards';
                 } else {
-                    // Optional: reset animation if it goes out of view
+                    // Opcional: reiniciar la animación si sale de la vista
                     // entry.target.style.opacity = 0;
                     // entry.target.style.transform = 'translateY(20px)';
                 }
             });
         }, {
-            threshold: 0.1 /* When 10% of the section is visible */
+            threshold: 0.1 /* Cuando el 10% de la sección es visible */
         });
 
         sections.forEach(section => {
-            section.style.opacity = 0; /* Initially hidden */
-            section.style.transform = 'translateY(20px)'; /* Initial position for animation */
+            section.style.opacity = 0; /* Inicialmente oculto */
+            section.style.transform = 'translateY(20px)'; /* Posición inicial para la animación */
             observer.observe(section);
         });
     </script>
