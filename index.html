@@ -669,6 +669,12 @@
             </ul>
         </div>
     </div>
+    <div id="modalMensaje" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span id="cerrarModal" class="close">&times;</span>
+            <p id="textoModal"></p>
+        </div>
+    </div>
 
     <script>
         // Actualiza el año actual en el footer
@@ -706,6 +712,50 @@
             section.style.transform = 'translateY(20px)'; /* Posición inicial para la animación */
             observer.observe(section);
         });
+
+    const modal = document.getElementById("modalMensaje");
+  const modalContent = document.getElementById("modalContent");
+  const cerrarBtn = document.getElementById("cerrarModal");
+
+  // Animaciones
+  function fadeIn() {
+    let opacity = 0;
+    modal.style.display = "flex";
+    const fade = setInterval(() => {
+      if (opacity >= 0.6) clearInterval(fade);
+      modal.style.backgroundColor = `rgba(27,58,87,${opacity})`;
+      opacity += 0.05;
+    }, 15);
+  }
+
+  function slideDown() {
+    let pos = -20;
+    let opacity = 0;
+    const slide = setInterval(() => {
+      if (pos >= 0) clearInterval(slide);
+      modalContent.style.transform = `translateY(${pos}px)`;
+      modalContent.style.opacity = opacity;
+      pos += 1;
+      opacity += 0.05;
+    }, 15);
+  }
+
+  // Mostrar modal con mensaje
+  function mostrarModal(mensaje) {
+    document.getElementById("textoModal").textContent = mensaje;
+    fadeIn();
+    slideDown();
+  }
+
+  // Cerrar modal
+  cerrarBtn.onclick = function() {
+    modal.style.display = "none";
+  };
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
     </script>
 </body>
 </html>

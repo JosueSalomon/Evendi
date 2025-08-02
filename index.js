@@ -29,10 +29,11 @@ function envioCorreo(event) {
       return response.text();
     })
     .then(data => {
-      alert("✅ " + "Correo enviado con exito, pronto tendras una respuesta"); // Mostrar respuesta del backend
+      alert("✅ Correo enviado con éxito, pronto tendrás una respuesta."); // Mostrar respuesta del backend
     })
     .catch(error => {
       console.error("❌ Error:", error);
-      alert("❌ No se pudo enviar el mensaje.");
+      alert("❌ No se pudo enviar el mensaje. Por favor, intenta más tarde.");
     });
 }
+
