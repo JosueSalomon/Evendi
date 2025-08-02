@@ -130,6 +130,7 @@
         }
     </style>
 </head>
+<script src="index.js"></script>
 <body>
 
     <!-- Navbar Fijo para Escritorio -->
@@ -521,28 +522,28 @@
                                         <label class="label">
                                             <span class="label-text" style="color: var(--color-text-main);">Tu Nombre</span>
                                         </label>
-                                        <input type="text" placeholder="Nombre completo" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                        <input id="nombre" type="text" placeholder="Nombre completo" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
                                     </div>
                                     <div class="form-control mb-4">
                                         <label class="label">
                                             <span class="label-text" style="color: var(--color-text-main);">Tu Correo Electrónico</span>
                                         </label>
-                                        <input type="email" placeholder="correo@ejemplo.com" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                        <input id="correo" type="email" placeholder="correo@ejemplo.com" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
                                     </div>
                                     <div class="form-control mb-4">
                                         <label class="label">
                                             <span class="label-text" style="color: var(--color-text-main);">Asunto</span>
                                         </label>
-                                        <input type="text" placeholder="Asunto del mensaje" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
+                                        <input id="asunto" type="text" placeholder="Asunto del mensaje" class="input input-bordered w-full rounded-md" style="border-color: var(--color-text-light);" />
                                     </div>
                                     <div class="form-control mb-6">
                                         <label class="label">
                                             <span class="label-text" style="color: var(--color-text-main);">Tu Mensaje</span>
                                         </label>
-                                        <textarea class="textarea textarea-bordered h-24 w-full rounded-md" placeholder="Escribe tu mensaje aquí..." style="border-color: var(--color-text-light);"></textarea>
+                                        <textarea id="cuerpo" class="textarea textarea-bordered h-24 w-full rounded-md" placeholder="Escribe tu mensaje aquí..." style="border-color: var(--color-text-light);"></textarea>
                                     </div>
                                     <div class="form-control">
-                                        <button class="btn btn-primary">Enviar Mensaje</button>
+                                        <button onclick="envioCorreo(event)" class="btn btn-primary">Enviar Mensaje</button>
                                     </div>
                                 </form>
                             </div>
@@ -553,10 +554,10 @@
                             <div class="card-body">
                                 <h3 class="card-title text-2xl font-semibold mb-4" style="color: var(--color-primary);">Nuestra Información</h3>
                                 <p class="text-gray-700 mb-2">
-                                    <strong style="color: var(--color-primary);">Correo Electrónico:</strong> info@evendi.com
+                                    <strong style="color: var(--color-primary);">Correo Electrónico:</strong> evendi.pm@gmail.com
                                 </p>
                                 <p class="text-gray-700 mb-2">
-                                    <strong style="color: var(--color-primary);">Teléfono:</strong> +1 (555) 123-4567
+                                    <strong style="color: var(--color-primary);">Teléfono:</strong> +504 9660-6056
                                 </p>
                                 <p class="text-gray-700 mb-2">
                                     <strong style="color: var(--color-primary);">Dirección:</strong> Piso 8, Torre Agalta, Boulevard Morazán, Tegucigalpa, Honduras
